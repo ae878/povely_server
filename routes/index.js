@@ -8,7 +8,7 @@ var path = require('path'), __parentDir = path.dirname(__dirname);
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '/public/uploads')
+    cb(null, __parentDir+'/public/uploads')
   },
   filename: function (req, file, cb) {
     file.uploadedFile = {
