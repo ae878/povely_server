@@ -6,7 +6,7 @@ var Diary = require('./../models/diary.js');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, __parentDir+ '/public/uploads')
+    cb(null, './public/uploads')
   },
   filename: function (req, file, cb) {
     file.uploadedFile = {
