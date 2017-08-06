@@ -2,6 +2,7 @@ var multer = require('multer');
 var express = require('express');
 var router = express.Router();
 const { wrap : async } = require('co');
+var Diary = require('./../models/diary.js');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -16,6 +17,7 @@ var storage = multer.diskStorage({
   }
 });
 var upload = multer({storage: storage});
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: '포블리n' });
@@ -23,12 +25,45 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/posting', upload.single('image'),async(function*(req,res){
-	res.json(req.file);
+  var diary = new User({
+    title : req.body.title,
+    description : req.body.description,
+    date : req.body.date,
+    photo : req.file.path
+  });
+
+    try {
+
+          diary.save();
+
+        res.json( {"result" : "success"} );
+
+    } catch( err ) {
+
+        console.log( err );
+  res.json({"result" : "fail"});
+    }
 
 }));
 
+router.post('/list', upload.single('image'),async(function*(req,res){
 
-router.get('/:id',async(function* (req,res){
-        res.json({title:req.params.id});
+  let diary = yield Diary.find();
+
+/*  let data = [];
+
+  for(let i=0; i<diary.length; i++){
+    let item = items[i];
+    let o = {
+      id: item.id,
+      title: item.name,
+      price: item.price,
+      seller: item.seller.username,
+      image: item.images[0].thumbnail_small
+    }
+    data.push(o);
+  }*/
+  res.json(diary);
 }));
+
 module.exports = router;
