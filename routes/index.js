@@ -25,7 +25,9 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/posting', upload.single('image'),async(function*(req,res){
-  var diary = new User({
+console.log(req.body);
+
+  var diary = new Diary({
     title : req.body.title,
     description : req.body.description,
     date : req.body.date,
