@@ -5,10 +5,9 @@ const { wrap : async } = require('co');
 var Diary = require('./../models/diary.js');
 var path = require('path'), __parentDir = path.dirname(__dirname);
 
-
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, __parentDir+'/public/uploads')
+    cb(null,'./public/uploads')
   },
   filename: function (req, file, cb) {
     file.uploadedFile = {
@@ -18,8 +17,7 @@ var storage = multer.diskStorage({
      cb(null, file.uploadedFile.name + '.' + file.uploadedFile.ext);
   }
 });
-var upload = multer({storage: storage});
-
+var upload = multer({dest: './public/uploads'});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -28,7 +26,7 @@ router.get('/', function(req, res, next) {
 
 
 router.post('/posting', upload.single('image'),async(function*(req,res){
-console.log(req.file);
+console.log(req.body);
 
   var diary = new Diary({
     title : req.body.title,
