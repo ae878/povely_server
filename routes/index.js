@@ -46,7 +46,7 @@ router.post('/posting', upload.single('image'),async(function*(req,res){
 
 }));
 
-router.post('/list', upload.single('image'),async(function*(req,res){
+router.get('/list', upload.single('image'),async(function*(req,res){
 
   let diary = yield Diary.find();
 
