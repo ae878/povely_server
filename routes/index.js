@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
      cb(null, file.uploadedFile.name + '.' + file.uploadedFile.ext);
   }
 });
-var upload = multer({storage: storage});
+var upload = multer({dest: 'uploads/'});
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
