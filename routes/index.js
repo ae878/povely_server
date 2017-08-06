@@ -5,9 +5,10 @@ const { wrap : async } = require('co');
 var Diary = require('./../models/diary.js');
 var path = require('path'), __parentDir = path.dirname(__dirname);
 
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null,'./public/uploads')
+    cb(null, '/public/uploads')
   },
   filename: function (req, file, cb) {
     file.uploadedFile = {
@@ -17,7 +18,8 @@ var storage = multer.diskStorage({
      cb(null, file.uploadedFile.name + '.' + file.uploadedFile.ext);
   }
 });
-var upload = multer({dest: 'uploads'});
+var upload = multer({storage: storage});
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
