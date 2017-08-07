@@ -19,7 +19,7 @@ var storage = multer.diskStorage({
   }
 });
 //var upload = multer({storage: storage});
-var upload = multer({ dest: './uploads' });
+var upload = multer({ dest: 'uploads' });
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: '포블리n' });
