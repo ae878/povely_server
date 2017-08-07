@@ -6,6 +6,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var mongoose    = require('mongoose');
+var multer = require('multer');
 const { wrap : async } = require('co');
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -20,7 +21,7 @@ db.once('open',function(){
 	console.log("Connected to mongod server");
 });
 
-mongoose.connect('mongodb://52.79.217.172/user');
+mongoose.connect('mongodb://localhost/user');
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -35,6 +36,7 @@ app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(multer({ dest: './uploads/'}));
 
 app.use('/', index);
 app.use('/users', users);
