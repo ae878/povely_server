@@ -10,7 +10,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/sign-up',function(req,res){
 
-	console.log(req.body.name);
+	console.log(req.body);
 	var user = new User({
 		password : req.body.password,
 	   email : req.body.email});
@@ -24,7 +24,7 @@ router.post('/sign-up',function(req,res){
     } catch( err ) {
 
         console.log( err );
-	res.json({"result" : "fail"});
+	      res.json({"result" : "fail"});
     }
 });
 
