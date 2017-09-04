@@ -11,6 +11,7 @@ var storage = multer.diskStorage({
     cb(null, './public/uploads')
   },
   filename: function (req, file, cb) {
+    console.log(file);
     file.uploadedFile = {
        name: file.originalname,
        ext: file.mimetype.split('/')[1]
@@ -28,6 +29,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/posting', upload.single('image'),async(function*(req,res){
 console.log(req.file);
+console.log(req.body);
 
   var diary = new Diary({
     title : req.body.title,

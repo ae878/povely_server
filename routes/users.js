@@ -9,13 +9,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/sign-up',function(req,res){
-	
+
 	console.log(req.body.name);
 	var user = new User({
-		name : req.body.name,
 		password : req.body.password,
-		id : req.body.id,
-		mobile : req.body.mobile});
+	   email : req.body.email});
 
 	  try {
 
